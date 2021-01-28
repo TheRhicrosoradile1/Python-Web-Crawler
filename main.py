@@ -1,11 +1,11 @@
 import threading
 from queue import Queue
-from Spider import Spider
+from spider import Spider
 from domain import *
 from general import *
 
 PROJECT_NAME = 'briancodex'
-HOMEPAGE= 'https://github.com/briancodex/'
+HOMEPAGE= 'https://drive.google.com/drive/folders/12-HYu2tIw3UFxUFAxILhlbF6NBra6FeN'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE=PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
@@ -13,17 +13,23 @@ NUMBER_OF_THREADS = 8
 queue =Queue()
 Spider(PROJECT_NAME,HOMEPAGE,DOMAIN_NAME)
 
+
+
 def create_workers():
     for _ in range(NUMBER_OF_THREADS):
         t=threading.Thread(target=work)
         t.daemon = True
         t.start()
 
+
+
 def work():
     while True:
         url = queue.get()
         Spider.crawl_page(threading.current_thread().name,url)
         queue.task_done()
+
+
 
 def create_jobs():
     for link in file_to_set(QUEUE_FILE):

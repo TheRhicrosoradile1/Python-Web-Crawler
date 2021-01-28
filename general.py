@@ -10,12 +10,11 @@ def create_project_dir(directory):
 #create_user_file function will create all files requested
 # 'queue.txt will store the lsit of files currently in the waiting-list
 # 'crawled.txt' will store the list of files scrawled
-def create_user_file(project_name,base_url):
+def create_data_file(project_name,base_url):
     queue = project_name +'/queue.txt'
     crawled = project_name +'/crawled.txt'
     if not os.path.isfile(queue):
         write_file(queue,base_url)
-
     if not os.path.isfile(crawled):
         write_file(crawled,'')
 
